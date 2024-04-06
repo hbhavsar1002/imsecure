@@ -39,7 +39,7 @@ inputPassword.addEventListener('input', function() {
 const apiKey = '5e72a621';
 const movieTitle = 'The Matrix';
 
-const url = "http://www.imdbapi.com/?apikey=${apiKey}&t=${encodeURIComponent(movieTitle)}";
+const url = "http://www.omdbapi.com/?apikey=${apiKey}&t=${encodeURIComponent(movieTitle)}";
 
 fetch(url)
   .then(response => {
