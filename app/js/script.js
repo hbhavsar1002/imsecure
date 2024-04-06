@@ -35,27 +35,53 @@ inputPassword.addEventListener('input', function() {
 });
 
 
+// Define a function to create a new rule section
+function createRuleSection(ruleNumber, ruleDesc) {
+    // Create elements
+    var section = document.createElement('section');
+    section.className = 'rule';
+    
+    var ruleContain = document.createElement('div');
+    ruleContain.className = 'rule-contain';
+    
+    var ruleContainer = document.createElement('div');
+    ruleContainer.className = 'rule-container';
+    
+    var ruleNumberDiv = document.createElement('div');
+    ruleNumberDiv.className = 'rule-number';
+    
+    var ruleIcon = document.createElement('img');
+    ruleIcon.className = 'rule-icon';
+    ruleIcon.setAttribute('src', 'app\\asset\\error.svg'); // Set image source
+    
+    var ruleNoSpan = document.createElement('span');
+    ruleNoSpan.className = 'rule-no';
+    ruleNoSpan.textContent = ruleNumber; // Set rule number
+    
+    ruleNumberDiv.appendChild(ruleIcon);
+    ruleNumberDiv.appendChild(document.createTextNode('Rule '));
+    ruleNumberDiv.appendChild(ruleNoSpan);
+    
+    var ruleDescDiv = document.createElement('div');
+    ruleDescDiv.className = 'rule-desc';
+    ruleDescDiv.textContent = ruleDesc; // Set rule description
+    
+    var ruleCharLength = document.createElement('div');
+    ruleCharLength.className = 'rule-charlength';
+    
+    // Append elements
+    ruleContainer.appendChild(ruleNumberDiv);
+    ruleContainer.appendChild(ruleDescDiv);
+    
+    ruleContain.appendChild(ruleContainer);
+    ruleContain.appendChild(ruleCharLength);
+    
+    section.appendChild(ruleContain);
+    
+    // Append the new section to the document body or another container element
+    document.body.appendChild(section);
+}
 
-const apiKey = '5e72a621';
-const movieTitle = 'The Matrix';
-
-const url = "http://www.omdbapi.com/?apikey=${apiKey}&t=${encodeURIComponent(movieTitle)}";
-
-fetch(url)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    if (data.Response === 'True') {
-      console.log('Movie found:', data.Title);
-      // Additional processing of movie data
-    } else {
-      console.log('Movie not found:', data.Error);
-    }
-  })
-  .catch(error => {
-    console.error('Error fetching movie data:', error);
-  });
+createRuleSection(1, 'Your password must include an uppercase letter.');
+createRuleSection(2, 'Your password must include an lowercase letter.');
+createRuleSection(3, 'Your password must be at least 8 characters long.');
