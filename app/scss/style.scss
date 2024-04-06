@@ -1,2 +1,101 @@
 @use 'globals';
 @use 'components';
+@use './util' as *;
+
+
+
+.title-container{
+    padding: rem(10);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.title-text{
+    color: #ff4411;
+    font-size: rem(48); 
+    font-family: 'Signika', sans-serif;
+
+}
+
+.input{
+    margin-top: rem(20);
+    padding: rem(5);
+    width: 90%;
+    max-width: rem(700);
+    //background-color: burlywood;
+
+    &-desc{
+        font-size: rem(15);
+        margin-left: rem(5);
+    }
+
+
+    &-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        padding: rem(5);
+    }
+    
+    &-text{
+        width: 100%;
+        padding: rem(10);
+        line-height: rem(30);
+        background: #fff;
+        border: rem(2) solid #c5c5c5;
+        border-radius: rem(10);
+        transition: all 100ms ease-in-out;
+        outline: none;
+        &:focus{
+            border-color: #656565;
+        }
+    }
+
+    &-charlength{
+        border: rem(2) solid transparent;
+        border-radius: rem(10);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+}
+
+.rule{
+    margin-top: rem(20);
+    padding: rem(5);
+    width: 90%;
+    max-width: rem(700);
+    border: rem(2) solid black;
+    border-radius: rem(4);
+    
+    &-container{
+        border: rem(2) solid transparent;
+        border-radius: rem(10);
+    }
+
+    &-number{
+        border-top: rem(2) solid transparent;
+        border-top-left-radius: rem(10);
+        border-top-right-radius: rem(10);
+        padding: rem(7);
+        line-height: rem(20);
+        background-color: #ffc7c7;
+    }
+
+    &-desc{
+        background-color: #ffecec;
+        border-top: rem(2) solid transparent;
+        border-bottom-left-radius: rem(10);
+        border-bottom-right-radius: rem(10);
+        padding: rem(20) rem(10);
+    }
+
+}

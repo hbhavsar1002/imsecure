@@ -1,5 +1,10 @@
+:root{
+	--body-background-color: linear-gradient( 92.7deg,  rgba(245,212,212,1) 8.5%, rgba(252,251,224,1) 90.2% );
+}
+
 html {
 	font-size: 100%;
+	font-family: var(--font-body);
 	box-sizing: border-box;
 }
 
@@ -11,5 +16,11 @@ html {
 
 body {
 	margin: 0;
-	padding: 0;
+	padding: 3rem;
+	background: var(--body-background-color);
+	//color: var(--body-color);
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	font-weight: 600;
 }
