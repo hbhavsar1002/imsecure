@@ -426,6 +426,17 @@
 				ruleNumber += 1;
 				const won = document.querySelector('.won');
 				won.classList.remove('inactive');
+				document.addEventListener('keydown', function(e) {
+					e.preventDefault();
+				});
+				
+				document.addEventListener('keypress', function(e) {
+					e.preventDefault();
+				});
+
+				document.addEventListener('keyup', function(e) {
+					e.preventDefault();
+				});
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
