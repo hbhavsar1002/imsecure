@@ -408,6 +408,7 @@
 				
 					let index = Math.floor(Math.random() * captchaChars.length + 1); 
 					if (captcha.indexOf(captchaChars[index]) == -1){
+						
 						captcha.push(captchaChars[index]);
 					}
 					else {
@@ -415,6 +416,9 @@
 					}
 				  }
 				globalCaptcha = captcha.join("");
+				const vowels = ['a', 'e', 'i', 'o', 'u'];
+    			globalCaptcha = globalCaptcha.split('').map(char => vowels.includes(char) ? char.toUpperCase() : char).join('');
+
 			}
 
 			if (inputPassword.innerText.includes(globalCaptcha)) {
