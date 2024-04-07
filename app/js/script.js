@@ -88,20 +88,23 @@
 	
 		return false;
 	}
-
+	let wonFlag = false;
 	const checkRule = (ruleNumber, currentCount) =>{
+
 		if (ruleNumber == 1){
 			
 			if(currentCount >= 5){
 				setError(ruleNumber,'Your password must be atleast 5 characters long.')
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
+				wonFlag = true;
 				checkRule(ruleNumber, currentCount);
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
 				
 			}else{
+				wonFlag=false;
 				if(previousRuleNumber >= 2){
 					setIncorrect(ruleNumber);
 					checkRule(2, currentCount);
@@ -117,6 +120,7 @@
 				setError(ruleNumber,'Your password must contain an uppercase letter.')
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
+				wonFlag=true;
 				checkRule(ruleNumber, currentCount)
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
@@ -124,6 +128,7 @@
 				
 
 			}else{
+				wonFlag=false;
 				if(previousRuleNumber >= 3){
 					setIncorrect(ruleNumber);
 					checkRule(3, currentCount);
@@ -139,12 +144,13 @@
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
 				checkRule(ruleNumber, currentCount)
+				wonFlag=true;
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
 				
 
-			}else{
+			}else{wonFlag=false;
 				if(previousRuleNumber >= 4){
 					setIncorrect(ruleNumber);
 					checkRule(4, currentCount);
@@ -160,11 +166,12 @@
 				setError(ruleNumber, "Your passowrd must contain atleast one number");
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
+				wonFlag=true;
 				checkRule(ruleNumber, currentCount);
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
-			} else {
+			} else {wonFlag=false;
 			  if (previousRuleNumber >= 5) {
 				setIncorrect(ruleNumber);
 				checkRule(5, currentCount);
@@ -200,11 +207,12 @@
 				setError(ruleNumber, "Your passowrd must contain Roman Numeral");
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
+				wonFlag=true;
 				checkRule(ruleNumber, currentCount);
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
-			} else {
+			} else {wonFlag=false;
 			  if (previousRuleNumber >= 6) {
 				setIncorrect(ruleNumber);
 				checkRule(6, currentCount);
@@ -223,11 +231,12 @@
 				setError(ruleNumber, "Sum of the digits in the password must be equal to 25");
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
+				wonFlag=true;
 				checkRule(ruleNumber, currentCount);
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
-			} else {
+			} else {wonFlag=false;
 			  if (previousRuleNumber >= 7) {
 				setIncorrect(ruleNumber);
 				checkRule(7, currentCount);
@@ -246,11 +255,12 @@
 				setError(ruleNumber, "Your password must contain one of \"i am loved\", \"i am worthy\", \"i am enough\", \"i am secure\"");
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
+				wonFlag=true;
 				checkRule(ruleNumber, currentCount);
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
-			} else {
+			} else {wonFlag=false;
 			  if (previousRuleNumber >= 8) {
 				setIncorrect(ruleNumber);
 				checkRule(8, currentCount);
@@ -281,10 +291,11 @@
 					setCorrect(ruleNumber);
 					ruleNumber += 1;
 					checkRule(ruleNumber, currentCount);
+					wonFlag=true;
 					if(ruleNumber > previousRuleNumber ){
 						previousRuleNumber = ruleNumber;
 					}
-				}else{
+				}else{wonFlag=false;
 					if (previousRuleNumber >= 9) {
 						setIncorrect(ruleNumber);
 						checkRule(9, currentCount);
@@ -303,20 +314,26 @@
 			let currentTime = new Date();
 			let currentHour = currentTime.getHours();
 			let currentMinutes = currentTime.getMinutes();
+			if (currentHour < 10) {
+				currentHour = '0' + currentHour;
+			}
+			if (currentMinutes < 10) {
+				currentMinutes = '0' + currentMinutes;
+			}
 			let time = currentHour + ':' + currentMinutes;
-
 			if (inputPassword.innerText.includes(time)) {
 				setError(ruleNumber, "Your password must contain current time in HH:MM format.");
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
+				wonFlag=true;
 				checkRule(ruleNumber, currentCount);
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
-			} else {
+			} else {wonFlag=false;
 			  if (previousRuleNumber >= 10) {
 				setIncorrect(ruleNumber);
-				checkRule(11, currentCount);
+				checkRule(10, currentCount);
 			  } else {
 				setError(ruleNumber, "Your password must contain current time in HH:MM format.");
 			}
@@ -328,11 +345,12 @@
 				setError(ruleNumber, "Your password length must be a prime number.");
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
+				wonFlag=true;
 				checkRule(ruleNumber, currentCount);
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
-			} else {
+			} else {wonFlag=false;
 			  if (previousRuleNumber >= 11) {
 				setIncorrect(ruleNumber);
 				checkRule(11, currentCount);
@@ -366,11 +384,12 @@
 				setError(ruleNumber, "Your password must have all the vowels in uppercase.");
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
+				wonFlag=true;
 				checkRule(ruleNumber, currentCount);
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
-			} else {
+			} else {wonFlag=false;
 			  if (previousRuleNumber >= 12) {
 				setIncorrect(ruleNumber);
 				checkRule(12, currentCount);
@@ -402,11 +421,12 @@
 				setError(ruleNumber, "Your password must have the following captcha.");
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
+				wonFlag=true;
 				checkRule(ruleNumber, currentCount);
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
-			} else {
+			} else {wonFlag=false;
 			  if (previousRuleNumber >= 13) {
 				setIncorrect(ruleNumber);
 				checkRule(13, currentCount);
@@ -423,23 +443,26 @@
 				setError(ruleNumber, "Your password must contain a hex color code. Pick a color: ");
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
-				const won = document.querySelector('.won');
-				won.classList.remove('inactive');
-				document.addEventListener('keydown', function(e) {
-					e.preventDefault();
-				});
-				
-				document.addEventListener('keypress', function(e) {
-					e.preventDefault();
-				});
-
-				document.addEventListener('keyup', function(e) {
-					e.preventDefault();
-				});
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
-			} else {
+				if(wonFlag){
+					const won = document.querySelector('.won');
+					won.classList.remove('inactive');
+					document.addEventListener('keydown', function(e) {
+						e.preventDefault();
+					});
+					
+					document.addEventListener('keypress', function(e) {
+						e.preventDefault();
+					});
+		
+					document.addEventListener('keyup', function(e) {
+						e.preventDefault();
+					});
+		
+				}
+			} else {wonFlag=false;
 			  if (previousRuleNumber >= 14) {
 				setIncorrect(ruleNumber);
 			  } else {
@@ -463,8 +486,9 @@
 		let currentCount = this.innerText.length;
 
 		performRules(currentCount);
-
 		charCounter(currentCount);
+
+		
 		
 	});
 
