@@ -90,7 +90,7 @@
 	}
 
 	const checkRule = (ruleNumber, currentCount) =>{
-		if (ruleNumber == 10){
+		if (ruleNumber == 1){
 			
 			if(currentCount >= 5){
 				setError(ruleNumber,'Your password must be atleast 5 characters long.')
@@ -275,7 +275,7 @@
 			.then(data => {
 				// Do something with the fetched data
 				const answer = data.answer.toLowerCase();
-				console.log("Wordle answer:", answer);
+				//console.log("Wordle answer:", answer);
 				if (inputPassword.innerText.toLowerCase().includes(answer)) {
 					//console.log("Wordle answer:", answer);
 					setError(ruleNumber, "Your password must contain today's ");
