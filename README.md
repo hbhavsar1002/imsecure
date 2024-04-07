@@ -8,7 +8,7 @@ Mandatory
 2. Your password must contain Lowercase letter
 3. Your password must contain a number
 4. Your password must contain a special character(constraints included)
-5. Your password must be atleast 8 characters
+5. Your password must be atleast 5 characters
 Random(5 to all)
 6. Your password must contain today's wordle(link of wordle) answer
 7. Your password must the current phase of moon ???? Your password must contain elment from periodic table(photo of periodic table )

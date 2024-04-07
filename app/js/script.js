@@ -1,10 +1,9 @@
-
-
 const inputPassword = document.querySelector('.input-text');
 const charCount = document.querySelector('.input-charlength');
 let previousCount = 0;
 let correct = false;
 let ruleNumber = 1;
+let previousRuleNumber = 0;
 
 const charCounter = (currentCount) =>{
 	
@@ -29,27 +28,80 @@ const charCounter = (currentCount) =>{
 	console.log(previousCount);
 }
 
-const setCorrect = () =>{
-	document.documentElement.style.setProperty('--rule-number', 'var(--green-up)');
-	document.documentElement.style.setProperty('--rule-text', 'var(--green-down)');
-	document.documentElement.style.setProperty('--rule-border', 'var(--green-broder)');
+const setCorrect = (ruleNumber) =>{
+	let ruleTileIDNumber = '#rule-' + ruleNumber;
+	alert(ruleTileIDNumber);
+	let ruleTiles = document.querySelector(ruleTileIDNumber);
+	alert(ruleTiles);
+	var computedValue = getComputedStyle(document.documentElement).getPropertyValue('--green-up');
+	ruleTiles.style.setProperty('--rule-number', computedValue);
+	ruleTiles.style.setProperty('--rule-text', 'var(--green-down)');
+	ruleTiles.style.setProperty('--rule-border', 'var(--green-broder)');
 	let ruleIDNumber = '#rule-icon-' + ruleNumber;
 	var ruleIcon = document.querySelector(ruleIDNumber);
 	ruleIcon.src = 'app//asset//checkmark.svg';
 }
 
+const setError = (number,desc) =>{
+	createRuleSection(number, desc);
+}
+
+const setIncorrect = (ruleNumber) =>{
+	alert("incoorect");
+	let ruleTileIDNumber = '#rule-' + ruleNumber;
+	alert(ruleTileIDNumber);
+	let ruleTiles = document.querySelector(ruleTileIDNumber);
+	alert(ruleTiles);
+	var computedValue = getComputedStyle(document.documentElement).getPropertyValue('--red-up');
+	ruleTiles.style.setProperty('--rule-number', computedValue);
+	ruleTiles.style.setProperty('--rule-text', 'var(--red-down)');
+	ruleTiles.style.setProperty('--rule-border', 'var(--red-broder)');
+	let ruleIDNumber = '#rule-icon-' + ruleNumber;
+	var ruleIcon = document.querySelector(ruleIDNumber);
+	ruleIcon.src = 'app//asset//error.svg';
+}
+
 const checkRule = (ruleNumber, currentCount) =>{
 	if (ruleNumber == 1){
-		if(currentCount > 5){
-			setCorrect();
+		setError(ruleNumber,'Your password must be atleast 5 characters long.')
+		if(currentCount >= 5){
+			setCorrect(ruleNumber);
+			ruleNumber += 1;
+			checkRule(ruleNumber, currentCount)
+		}
+	}
+	else if(ruleNumber == 2){
+		setError(ruleNumber,'Your password must contain an uppercase letter.')
+		if(/[A-Z]/.test(inputPassword.innerText)){
+			setCorrect(ruleNumber);
+			ruleNumber += 1;
+			checkRule(ruleNumber, currentCount)
+		}
+	}else if(ruleNumber == 3){
+		
+		
+		if(/[^a-zA-Z0-9]/.test(inputPassword.innerText)){
+			setError(ruleNumber, 'Your password must contain special character.');
+			setCorrect(ruleNumber);
+			ruleNumber += 1;
+			checkRule(ruleNumber, currentCount)
+			previousRuleNumber = ruleNumber;
+
+		}else{
+			if(previousRuleNumber >= 4){
+				setIncorrect(ruleNumber);
+			}else{
+				setError(ruleNumber, 'Your password must contain special character.');
+			}
+			
+			
 		}
 	}
 }
 
 const performRules = (currentCount) =>{
-	
+
 	setTimeout(function() {
-		createRuleSection(1, 'Your password must be atleast 5 characters long.');
 		checkRule(ruleNumber, currentCount);
 	}, 200);
 }
@@ -78,6 +130,7 @@ const createRuleSection = (ruleNumber, ruleDesc) =>{
     // Create elements
     var section = document.createElement('section');
     section.className = 'rule';
+	section.id = 'rule-' + ruleNumber;
     
     var ruleContain = document.createElement('div');
     ruleContain.className = 'rule-contain';
@@ -91,13 +144,7 @@ const createRuleSection = (ruleNumber, ruleDesc) =>{
     var ruleIcon = document.createElement('img');
     ruleIcon.className = 'rule-icon';
 	ruleIcon.id = 'rule-icon-' + ruleNumber;
-	
-    
-	if(correct){
-		ruleIcon.setAttribute('src', 'app\\asset\\checkmark.svg'); // Set image source
-	}else{
-		ruleIcon.setAttribute('src', 'app\\asset\\error.svg'); // Set image source
-	}
+	ruleIcon.setAttribute('src', 'app\\asset\\error.svg'); 
     
     var ruleNoSpan = document.createElement('span');
     ruleNoSpan.className = 'rule-no';
