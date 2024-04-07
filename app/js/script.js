@@ -29,10 +29,10 @@ const charCounter = (currentCount) =>{
 }
 
 const setCorrect = (ruleNumber) =>{
+	
 	let ruleTileIDNumber = '#rule-' + ruleNumber;
-	alert(ruleTileIDNumber);
+	alert("correct" + ruleTileIDNumber);
 	let ruleTiles = document.querySelector(ruleTileIDNumber);
-	alert(ruleTiles);
 	var computedValue = getComputedStyle(document.documentElement).getPropertyValue('--green-up');
 	ruleTiles.style.setProperty('--rule-number', computedValue);
 	ruleTiles.style.setProperty('--rule-text', 'var(--green-down)');
@@ -47,11 +47,10 @@ const setError = (number,desc) =>{
 }
 
 const setIncorrect = (ruleNumber) =>{
-	alert("incoorect");
+	
 	let ruleTileIDNumber = '#rule-' + ruleNumber;
-	alert(ruleTileIDNumber);
+	alert("incoorect" + ruleTileIDNumber);
 	let ruleTiles = document.querySelector(ruleTileIDNumber);
-	alert(ruleTiles);
 	var computedValue = getComputedStyle(document.documentElement).getPropertyValue('--red-up');
 	ruleTiles.style.setProperty('--rule-number', computedValue);
 	ruleTiles.style.setProperty('--rule-text', 'var(--red-down)');
@@ -63,33 +62,63 @@ const setIncorrect = (ruleNumber) =>{
 
 const checkRule = (ruleNumber, currentCount) =>{
 	if (ruleNumber == 1){
-		setError(ruleNumber,'Your password must be atleast 5 characters long.')
+		
 		if(currentCount >= 5){
+			setError(ruleNumber,'Your password must be atleast 5 characters long.')
 			setCorrect(ruleNumber);
 			ruleNumber += 1;
-			checkRule(ruleNumber, currentCount)
+			checkRule(ruleNumber, currentCount);
+			if(ruleNumber > previousRuleNumber ){
+				previousRuleNumber = ruleNumber;
+			}
+			
+		}else{
+			if(previousRuleNumber >= 2){
+				setIncorrect(ruleNumber);
+				checkRule(2, currentCount);
+			}else{
+				setError(ruleNumber,'Your password must be atleast 5 characters long.')
+			}
+			
 		}
 	}
 	else if(ruleNumber == 2){
-		setError(ruleNumber,'Your password must contain an uppercase letter.')
+		
 		if(/[A-Z]/.test(inputPassword.innerText)){
+			setError(ruleNumber,'Your password must contain an uppercase letter.')
 			setCorrect(ruleNumber);
 			ruleNumber += 1;
 			checkRule(ruleNumber, currentCount)
+			if(ruleNumber > previousRuleNumber ){
+				previousRuleNumber = ruleNumber;
+			}
+			
+
+		}else{
+			if(previousRuleNumber >= 3){
+				setIncorrect(ruleNumber);
+				checkRule(3, currentCount);
+			}else{
+				setError(ruleNumber,'Your password must be atleast 5 characters long.')
+			}
+			
 		}
 	}else if(ruleNumber == 3){
 		
-		
-		if(/[^a-zA-Z0-9]/.test(inputPassword.innerText)){
+		if(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(inputPassword.innerText)){
 			setError(ruleNumber, 'Your password must contain special character.');
 			setCorrect(ruleNumber);
 			ruleNumber += 1;
 			checkRule(ruleNumber, currentCount)
-			previousRuleNumber = ruleNumber;
+			if(ruleNumber > previousRuleNumber ){
+				previousRuleNumber = ruleNumber;
+			}
+			
 
 		}else{
 			if(previousRuleNumber >= 4){
 				setIncorrect(ruleNumber);
+				checkRule(4, currentCount);
 			}else{
 				setError(ruleNumber, 'Your password must contain special character.');
 			}
