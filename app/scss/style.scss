@@ -135,7 +135,8 @@
         text-decoration: none;
         color: #ff4411;
         cursor: pointer;
-
+        margin-right:  rem(5);
+        margin-left: rem(5);
         &:hover{
             transition: all 300ms;
             color:black;

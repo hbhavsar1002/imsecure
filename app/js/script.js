@@ -128,7 +128,7 @@
 					setIncorrect(ruleNumber);
 					checkRule(3, currentCount);
 				}else{
-					setError(ruleNumber,'Your password must be atleast 5 characters long.')
+					setError(ruleNumber,'Your password must contain an uppercase letter.')
 				}
 				
 			}
@@ -155,7 +155,6 @@
 				
 			}
 		}else if (ruleNumber == 4) {
-			alert("rule 4");
 			const regex = /\d/;
 			if (regex.test(inputPassword.innerText)) {
 				setError(ruleNumber, "Your passowrd must contain atleast one number");
@@ -244,7 +243,7 @@
 			const matches = inputPassword.innerText.match(pattern);
 
 			if (matches !== null && matches.length === 1) {
-				setError(ruleNumber, "Your password must contain one of \"i am loved\", \"i am worthy\", \"i am enough\", \"i am loved\"");
+				setError(ruleNumber, "Your password must contain one of \"i am loved\", \"i am worthy\", \"i am enough\", \"i am secure\"");
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
 				checkRule(ruleNumber, currentCount);
@@ -256,7 +255,7 @@
 				setIncorrect(ruleNumber);
 				checkRule(8, currentCount);
 			  } else {
-				setError(ruleNumber, "Your password must contain one of \"i am loved\", \"i am worthy\", \"i am enough\", \"i am loved\"");
+				setError(ruleNumber, "Your password must contain one of \"i am loved\", \"i am worthy\", \"i am enough\", \"i am secure\"");
 			}
 			
 			}
@@ -513,7 +512,7 @@
 		if(ruleNumber == 8){
 			const link = document.createElement('a');
 			link.href = "https://www.nytimes.com/games/wordle/index.html";
-			link.textContent = " Wordle";
+			link.textContent = "Wordle";
 			link.target = "_blank";
 			link.className = 'rule-link';
 			ruleDescDiv.appendChild(link);
