@@ -32,12 +32,12 @@
 	const setCorrect = (ruleNumber) =>{
 		
 		let ruleTileIDNumber = '#rule-' + ruleNumber;
-		alert("correct" + ruleTileIDNumber);
+		//alert("correct" + ruleTileIDNumber);
 		let ruleTiles = document.querySelector(ruleTileIDNumber);
 		var computedValue = getComputedStyle(document.documentElement).getPropertyValue('--green-up');
 		ruleTiles.style.setProperty('--rule-number', computedValue);
 		ruleTiles.style.setProperty('--rule-text', 'var(--green-down)');
-		ruleTiles.style.setProperty('--rule-border', 'var(--green-broder)');
+		ruleTiles.style.setProperty('--rule-border', 'var(--green-border)');
 		let ruleIDNumber = '#rule-icon-' + ruleNumber;
 		var ruleIcon = document.querySelector(ruleIDNumber);
 		ruleIcon.src = 'app//asset//checkmark.svg';
@@ -50,12 +50,12 @@
 	const setIncorrect = (ruleNumber) =>{
 		
 		let ruleTileIDNumber = '#rule-' + ruleNumber;
-		alert("incoorect" + ruleTileIDNumber);
+		//alert("incoorect" + ruleTileIDNumber);
 		let ruleTiles = document.querySelector(ruleTileIDNumber);
-		var computedValue = getComputedStyle(document.documentElement).getPropertyValue('--red-up');
-		ruleTiles.style.setProperty('--rule-number', computedValue);
+		var computedValue = getComputedStyle(document.documentElement).getPropertyValue('--red-border');
+		ruleTiles.style.setProperty('--rule-number', 'var(--red-up)');
 		ruleTiles.style.setProperty('--rule-text', 'var(--red-down)');
-		ruleTiles.style.setProperty('--rule-border', 'var(--red-broder)');
+		ruleTiles.style.setProperty('--rule-border', 'var(--red-border)');
 		let ruleIDNumber = '#rule-icon-' + ruleNumber;
 		var ruleIcon = document.querySelector(ruleIDNumber);
 		ruleIcon.src = 'app//asset//error.svg';
@@ -74,6 +74,20 @@
 	  
 		return true;
 	  }
+
+	  function isValidHexColorInput(inputString) {
+		const parts = inputString.split('#');
+		const hexColorPattern = /^[0-9A-F]{6}$/i;
+	
+		for (let i = 1; i < parts.length; i++) {
+			const hexColor = parts[i];
+			if (hexColorPattern.test(hexColor)) {
+				return true; 
+			}
+		}
+	
+		return false;
+	}
 
 	const checkRule = (ruleNumber, currentCount) =>{
 		if (ruleNumber == 10){
@@ -389,8 +403,7 @@
 				setError(ruleNumber, "Your password must have the following captcha.");
 				setCorrect(ruleNumber);
 				ruleNumber += 1;
-				const won = document.querySelector('.won');
-				won.classList.remove('inactive');
+				checkRule(ruleNumber, currentCount);
 				if(ruleNumber > previousRuleNumber ){
 					previousRuleNumber = ruleNumber;
 				}
@@ -404,10 +417,28 @@
 			
 			}
 		}
+		else if(ruleNumber == 13){
+			const hexColorPattern = /^#[0-9A-F]{6}$/i;
+
+			if (isValidHexColorInput(inputPassword.innerText)) {
+				setError(ruleNumber, "Your password must contain a hex color code. Pick a color: ");
+				setCorrect(ruleNumber);
+				ruleNumber += 1;
+				const won = document.querySelector('.won');
+				won.classList.remove('inactive');
+				if(ruleNumber > previousRuleNumber ){
+					previousRuleNumber = ruleNumber;
+				}
+			} else {
+			  if (previousRuleNumber >= 14) {
+				setIncorrect(ruleNumber);
+			  } else {
+				setError(ruleNumber, "Your password must contain a hex color code. Pick a color: ");
+			}
+			
+			}
+		}
 	}
-
-
-	
 
 	const performRules = (currentCount) =>{
 
@@ -479,7 +510,7 @@
 			ruleDescDiv.appendChild(document.createTextNode(" answer."));
 		}
 
-		if(ruleNumber == 1){
+		if(ruleNumber == 12){
 			
 			const canv = document.createElement("canvas");
 			canv.className = "rule-captcha";
@@ -491,7 +522,13 @@
 			ruleDescDiv.appendChild(canv);
 		}
 
-		
+		if(ruleNumber == 13){
+			const colorPicker = document.createElement('input');
+			colorPicker.setAttribute('type', 'color');
+			colorPicker.className = 'rule-colorPicker';
+			ruleDescDiv.appendChild(colorPicker);
+		}
+
 		var ruleCharLength = document.createElement('div');
 		ruleCharLength.className = 'rule-charlength';
 		

@@ -143,11 +143,14 @@
     }
 
     &-captcha{
+        margin-left: rem(5);
         pointer-events: none;
     }
 
+    &-colorPicker{
+        margin-left: rem(5);
+    }
 }
-
 .won{
 
     margin-top: rem(20);
