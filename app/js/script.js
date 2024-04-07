@@ -1,17 +1,13 @@
-console.log('HELLO');
-
-const test = () => {
-	console.log('this is a test');
-};
 
 
 const inputPassword = document.querySelector('.input-text');
 const charCount = document.querySelector('.input-charlength');
 let previousCount = 0;
+let correct = false;
+let ruleNumber = 1;
 
-inputPassword.addEventListener('input', function() {
-    // Handle user input
-	let currentCount = this.innerText.length;
+const charCounter = (currentCount) =>{
+	
     console.log('User input char:', currentCount);
 	charCount.innerText = currentCount;
 	charCount.style.opacity = '0'; 
@@ -31,12 +27,54 @@ inputPassword.addEventListener('input', function() {
 
 	previousCount = currentCount;
 	console.log(previousCount);
+}
+
+const setCorrect = () =>{
+	document.documentElement.style.setProperty('--rule-number', 'var(--green-up)');
+	document.documentElement.style.setProperty('--rule-text', 'var(--green-down)');
+	document.documentElement.style.setProperty('--rule-border', 'var(--green-broder)');
+	let ruleIDNumber = '#rule-icon-' + ruleNumber;
+	var ruleIcon = document.querySelector(ruleIDNumber);
+	ruleIcon.src = 'app//asset//checkmark.svg';
+}
+
+const checkRule = (ruleNumber, currentCount) =>{
+	if (ruleNumber == 1){
+		if(currentCount > 5){
+			setCorrect();
+		}
+	}
+}
+
+const performRules = (currentCount) =>{
+	
+	setTimeout(function() {
+		createRuleSection(1, 'Your password must be atleast 5 characters long.');
+		checkRule(ruleNumber, currentCount);
+	}, 200);
+}
+
+
+inputPassword.addEventListener('input', function() {
+    // Handle user input
+	let currentCount = this.innerText.length;
+
+	performRules(currentCount);
+
+	charCounter(currentCount);
 	
 });
 
+const createdRuleNumbers = [];
+
 
 // Define a function to create a new rule section
-function createRuleSection(ruleNumber, ruleDesc) {
+const createRuleSection = (ruleNumber, ruleDesc) =>{
+
+	if (createdRuleNumbers.includes(ruleNumber)) {
+        console.log('Section with rule number ' + ruleNumber + ' already exists.');
+        return; // Exit the function if the section already exists
+    }
     // Create elements
     var section = document.createElement('section');
     section.className = 'rule';
@@ -52,7 +90,14 @@ function createRuleSection(ruleNumber, ruleDesc) {
     
     var ruleIcon = document.createElement('img');
     ruleIcon.className = 'rule-icon';
-    ruleIcon.setAttribute('src', 'app\\asset\\error.svg'); // Set image source
+	ruleIcon.id = 'rule-icon-' + ruleNumber;
+	
+    
+	if(correct){
+		ruleIcon.setAttribute('src', 'app\\asset\\checkmark.svg'); // Set image source
+	}else{
+		ruleIcon.setAttribute('src', 'app\\asset\\error.svg'); // Set image source
+	}
     
     var ruleNoSpan = document.createElement('span');
     ruleNoSpan.className = 'rule-no';
@@ -80,8 +125,10 @@ function createRuleSection(ruleNumber, ruleDesc) {
     
     // Append the new section to the document body or another container element
     document.body.appendChild(section);
-}
 
-createRuleSection(1, 'Your password must include an uppercase letter.');
-createRuleSection(2, 'Your password must include an lowercase letter.');
-createRuleSection(3, 'Your password must be at least 8 characters long.');
+	createdRuleNumbers.push(ruleNumber);
+    
+	setTimeout(function() {
+        section.classList.add('fade-in');
+    }, 100);
+}

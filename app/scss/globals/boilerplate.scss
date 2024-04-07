@@ -1,14 +1,18 @@
 :root{
 	--body-background-color: linear-gradient( 92.7deg,  rgba(245,212,212,1) 8.5%, rgba(252,251,224,1) 90.2% );
-	--error-number: var(--red-up);
-	--error-text: var(--red-down);
-
+	--rule-number: var(--red-up);
+	--rule-text: var(--red-down);
+	--rule-border: var(--red-border);
 }
 
 :root{
 
 	--red-up: #ffc7c7;
 	--red-down: #ffecec;
+	--red-border: red;
+	--green-down: #e3ffe3;
+	--green-up: #aef3ae;
+	--green-border: #267b30;
 }
 
 html {

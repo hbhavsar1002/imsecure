@@ -56,7 +56,7 @@
     }
 
     &-charlength{
-        border: rem(2) solid blue;
+        border: rem(2) solid transparent;
         border-radius: rem(10);
         width: 40px;
         height: 40px;
@@ -74,7 +74,8 @@
     width: 90%;
     max-width: rem(700);
     border: rem(2) solid transparent;
-    
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 
     &-contain{
         border: rem(2) solid transparent;
@@ -87,7 +88,7 @@
 
     &-container{
         width: 100%;
-        border: rem(2) solid red;
+        border: rem(2) solid var(--rule-border);
         border-radius: rem(10);
     }
 
@@ -106,7 +107,7 @@
         border-top-right-radius: rem(10);
         padding: rem(7);
         line-height: rem(20);
-        background-color: #ffc7c7;
+        background-color: var(--rule-number);
     }
 
     &-no{
@@ -114,7 +115,7 @@
     }
 
     &-desc{
-        background-color: #ffecec;
+        background-color: var(--rule-text);
         border-top: rem(2) solid transparent;
         border-bottom-left-radius: rem(10);
         border-bottom-right-radius: rem(10);
@@ -132,4 +133,8 @@
 
 .inactive{
     display: none;
+}
+
+.fade-in {
+    opacity: 1 !important;
 }
