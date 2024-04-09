@@ -580,7 +580,7 @@
 		section.appendChild(ruleContain);
 		
 		// Append the new section to the document body or another container element
-		document.body.appendChild(section);
+		document.querySelector('.reverse').appendChild(section);
 
 		createdRuleNumbers.push(ruleNumber);
 		

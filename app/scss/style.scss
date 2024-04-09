@@ -69,10 +69,7 @@
 }
 
 .rule{
-    margin-top: rem(20);
-    padding: rem(5);
-    width: 90%;
-    max-width: rem(700);
+    margin: rem(5);
     border: rem(2) solid transparent;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -191,4 +188,14 @@
 
 .fade-in {
     opacity: 1 !important;
+}
+
+.reverse{
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: rem(20);
+    padding: rem(5);
+    width: 90%;
+    max-width: rem(700);
+    border:2px solid transparent;
 }
