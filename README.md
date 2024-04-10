@@ -1,6 +1,8 @@
 # IMSecure
 IMSecure(I am secure) is a password game whose purpose is to create a strong password. This is similar to the password game developed by [Neal](https://neal.fun/password-game/). 
 
+The purpose of this project is to create a website that can help in generating strong passwords.
+
 ## Demo
 Youtube link: [https://youtu.be/sK85bioOLYs](https://youtu.be/sK85bioOLYs)
 
