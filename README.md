@@ -1,6 +1,10 @@
-# imsecure
- imsecure - the password game
+# IMSecure
+IMSecure(I am secure) is a password game whose purpose is to create a strong password. This is similar to the password game developed by [Neal](https://neal.fun/password-game/). 
 
+## Demo
+Youtube link: [https://youtu.be/sK85bioOLYs](https://youtu.be/sK85bioOLYs)
+
+<img src="https://github.com/hbhavsar1002/imsecure/assets/30213124/76393f68-137d-4821-bf76-d0ee57870cd9" width="600" height="600">
 
 ## Running the Project Locally
 
